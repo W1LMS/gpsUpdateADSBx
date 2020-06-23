@@ -27,7 +27,7 @@ if [ -f /boot/adsb-config.txt ] ; then # This script checks to make sure the ADS
     apt install moreutils -y
   fi
 
-  cp ./script/gpsUpdate.sh /usr/local/bin
+  cp ./bin/gpsUpdate.sh /usr/local/bin
   cp ./systemd/gpsUpdate.service /lib/systemd/system
 
   systemctl enable gpsUpdate
