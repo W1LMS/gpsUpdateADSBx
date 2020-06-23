@@ -6,15 +6,15 @@ This script was designed to work with [ADS-B Exchange's Raspberry Pi image: ADSB
 
 #### HOW DOES IT WORK?
 
-The script runs in a loop that cycles every 10 min, once the initial GPS fix is made. It uses [awk](http://manpages.ubuntu.com/manpages/bionic/man1/awk.1plan9.html) to retrieve the latitude, longitude and elevation from [gpspipe](http://manpages.ubuntu.com/manpages/trusty/man1/gpspipe.1.html). It then rounds the elevation to the nearest whole decimal. Next, it uses the values of gpsLon and gpsLat to calculate your current position with the previous position to see if it needs to update your location. If it needs to update, it will create a new config file for ADSBx and restart the services. If no update is needed, it will sleep for 10 minutes and check again.
+The script runs as a service that cycles every 10 min, once the initial GPS fix is made. It uses [awk](http://manpages.ubuntu.com/manpages/bionic/man1/awk.1plan9.html) to retrieve the latitude, longitude and elevation from [gpspipe](http://manpages.ubuntu.com/manpages/trusty/man1/gpspipe.1.html). It then rounds the elevation to the nearest whole decimal. Next, it uses the values of `gpsLon` and `gpsLat` to calculate your current position with the previous position to see if it needs to update your location. If it needs to update, it will create a new config file for ADSBx and restart the services. If no update is needed, it will sleep for 10 minutes and check again.
 
 #### PRE-REQUISITES
 
-The required packages for this script are: [gpsd](https://manpages.debian.org/buster/gpsd/gpsd.8.en.html), [gpsd-clients](https://manpages.debian.org/buster/gpsd-clients/index.html) (for [gpspipe](https://manpages.debian.org/buster/gpsd-clients/gpspipe.1.en.html)), [bc](https://manpages.debian.org/buster/bc/bc.1.en.html). The packages [gawk](https://manpages.debian.org/buster/gawk/gawk.1.en.html) and [moreutils](https://manpages.debian.org/buster/moreutils/index.html) (for [ts](https://manpages.debian.org/buster/moreutils/ts.1.en.html)) are pre-installed by default in the ADSBx Buster image.
+The required packages for this script are: [gpsd](https://manpages.debian.org/buster/gpsd/gpsd.8.en.html), [gpsd-clients](https://manpages.debian.org/buster/gpsd-clients/index.html) (for [gpspipe](https://manpages.debian.org/buster/gpsd-clients/gpspipe.1.en.html)), and [bc](https://manpages.debian.org/buster/bc/bc.1.en.html). The packages [gawk](https://manpages.debian.org/buster/gawk/gawk.1.en.html) and [moreutils](https://manpages.debian.org/buster/moreutils/index.html) (for [ts](https://manpages.debian.org/buster/moreutils/ts.1.en.html)) are pre-installed by default in the ADSBx Buster image.
 
     $ sudo apt install gpsd gpsd-clients bc
 
-After installing the required packages and their dependencies, you'll need to tell gpsd where your GPS device is located. If you are using a USB dongle GPS, like the U-blox7, it should be located at `/dev/ttyACM0`. If you are using a GPS hat, then your location will be either `/dev/ttyAMA0` or `/dev/ttyS0`, depending on your boot config settings, specifically UART.
+After installing the required packages and their dependencies, you'll need to tell `gpsd` where your GPS device is located. If you are using a USB dongle GPS, like the U-blox7, it should be located at `/dev/ttyACM0`. If you are using a GPS hat, then your location will be either `/dev/ttyAMA0` or `/dev/ttyS0`, depending on your boot config settings, specifically UART.
 
 You will need to edit `/etc/default/gpsd` and change `DEVICES=""` to `DEVICES="/dev/ttyACM0"`, or if using a GPS hat, the location of your hat. If you are not sure where your GPS hat is located, check to see which device is receiving data by using cat on both devices: 
 
@@ -24,7 +24,7 @@ or
     
     $ cat /dev/ttyS0
 
-Your GPS will need to have a fix for this to work, so you will want to be near a window or outside. Check your GPS manual for the light pattern that indicates a GPS fix. If you see lines of data filling your screen, then you have located the right device. Each line will start with "$GPxxx". Next, find `GPSD_OPTIONS=""` and change to `GPSD_OPTIONS="-n"`. This tells GPSD not to wait for the client to connect before polling.
+Your GPS will need to have a fix for this to work, so you will want to be near a window or outside. Check your GPS manual for the light pattern that indicates a GPS fix. If you see lines of data filling your screen, then you have located the right device. Each line will start with "$GPxxx". Next, find `GPSD_OPTIONS=""` and change to `GPSD_OPTIONS="-n"`. This tells `gpsd` not to wait for the client to connect before polling.
 
 Your file should look something like this when done:
 
