@@ -1,4 +1,4 @@
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/kn1gh7h4wk/gpsUpdateADSBx?label=release&sort=semver)](https://github.com/kn1gh7h4wk/gpsUpdateADSBx/releases/tag/v1.0.0)
+[![Build Status](https://travis-ci.org/kn1gh7h4wk/gpsUpdate.svg?branch=master)](https://travis-ci.org/kn1gh7h4wk/gpsUpdate)
 
 I created this script for personal use, but have made it available to the public, as well as contributors, for all who may find it useful or may improve upon it. I am not a coder or programmer so the script may look rough around the edges. I'm more of a hobbyist.
 
