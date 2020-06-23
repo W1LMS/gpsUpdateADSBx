@@ -53,8 +53,6 @@ At the top of the script, you'll want to edit the 2 variables to specify when th
         gpsLon="0.004" #approx. 1,215 ft
         #Diagonally, this is approx. 1,637 ft
         
-I will be making updates to this script, so if you find this useful, please check back often for updates.
-
 #### INSTALLATION
 
     $ sudo ./install.sh
