@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## ADD THE FOLLOWING TO CRONJOB: @reboot gpsUpdate.sh >> /home/pi/.gpsUpdate.log 2>&1
+## Modify gpsLat and gpsLon to your preferences. See the readme file for help
 
 gpsLat="0.003"  #default value is 0.002, (1,108 ft LAT)
 gpsLon="0.004"  #default value is 0.002, (1,215 ft LON)
