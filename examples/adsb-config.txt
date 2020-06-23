@@ -1,0 +1,12 @@
+LATITUDE=1.12345
+
+LONGITUDE=-1.2345
+
+ALTITUDE=150ft
+
+USER="buster_adsbx_change_me"
+
+DUMP1090=yes
+GAIN=49.2
+
+DUMP978=no
