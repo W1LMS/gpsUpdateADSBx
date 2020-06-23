@@ -1,0 +1,17 @@
+[Unit]
+Description=gpsUpdate for ADSBx Buster
+Requires=gpsd.service
+After=gpsd.service
+After=readsb.service
+After=adsbexchange.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=600
+ExecStart=/usr/local/bin/gpsUpdate.sh
+SyslogIdentifier=gpsUpdate
+
+[Install]
+WantedBy=default.target
