@@ -6,7 +6,7 @@ This script was designed to work with [ADS-B Exchange's Raspberry Pi image: ADSB
 
 #### HOW DOES IT WORK?
 
-The script runs as a service that cycles every 10 min, once the initial GPS fix is made. It uses [awk](http://manpages.ubuntu.com/manpages/bionic/man1/awk.1plan9.html) to retrieve the latitude, longitude and elevation from [gpspipe](http://manpages.ubuntu.com/manpages/trusty/man1/gpspipe.1.html). It then rounds the elevation to the nearest whole decimal. Next, it uses the values of `gpsLon` and `gpsLat` to calculate your current position with the previous position to see if it needs to update your location. If it needs to update, it will create a new config file for ADSBx and restart the services. If no update is needed, it will sleep for 10 minutes and check again.
+The script runs as a service that cycles every 10 min, once the initial GPS fix is made. It uses [awk](http://manpages.ubuntu.com/manpages/bionic/man1/awk.1plan9.html) to retrieve the latitude, longitude and elevation from [gpspipe](http://manpages.ubuntu.com/manpages/trusty/man1/gpspipe.1.html). It then rounds the elevation to the nearest whole decimal. Next, it uses the values of `gpsLon` and `gpsLat` to calculate your current position with the previous position to see if it needs to update your location. If it needs to update, it will create a new config file for ADSBx and restart the services. If no update is needed, it will sleep for 10 minutes and check again. If for some reason, you cannot get a GPS fix, it will use your last know coordinates until a GPS fix can be established. The script is to designed to update only after a minimum of 4 satellites has multilaterated your position (i.e. the pi receives elevation data).
 
 #### PRE-REQUISITES
 
